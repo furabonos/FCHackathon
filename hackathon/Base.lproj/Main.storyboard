@@ -26,27 +26,38 @@
                                             <action selector="cameraClick:" destination="BYZ-38-t0r" id="xFw-DD-VpY"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="filter1" id="aGN-fF-WB5">
+                                    <barButtonItem title="따뜻" id="aGN-fF-WB5">
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="filter1Click:" destination="BYZ-38-t0r" id="j8U-b2-gcu"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="filter2" id="JZr-80-9t3">
+                                    <barButtonItem title="소프트" id="JZr-80-9t3">
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="filter2Click:" destination="BYZ-38-t0r" id="bsH-jT-6N2"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="filter3" id="FXS-eo-yT8">
+                                    <barButtonItem title="호러" id="FXS-eo-yT8">
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="filter3Click:" destination="BYZ-38-t0r" id="caN-wQ-olc"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="filter4" id="9QJ-Ls-Qha">
+                                    <barButtonItem title="비비드" id="9QJ-Ls-Qha">
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="filter4Click:" destination="BYZ-38-t0r" id="Hxk-Xi-MRK"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="원본" id="Jej-NF-VU3">
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="originalClick:" destination="BYZ-38-t0r" id="u9d-YH-ZDf"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="save" id="leC-8z-STH">
+                                        <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="saveClick:" destination="BYZ-38-t0r" id="hov-E2-hvF"/>
                                         </connections>
@@ -54,27 +65,52 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MS4-Sp-C5G">
-                                <rect key="frame" x="7" y="153" width="360" height="360"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="360" id="OKk-Z0-AEF"/>
-                                    <constraint firstAttribute="height" constant="360" id="ecO-1E-vVK"/>
-                                </constraints>
+                                <rect key="frame" x="7" y="93" width="360" height="480"/>
                             </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QDk-mN-u1z">
+                                <rect key="frame" x="0.0" y="613" width="302" height="54"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9g-h2-oax">
+                                <rect key="frame" x="298" y="613" width="77" height="54"/>
+                                <state key="normal" image="eraser"/>
+                                <connections>
+                                    <action selector="deleteClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ncD-L2-mCM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ib-8x-drH">
+                                <rect key="frame" x="155.5" y="301.5" width="64" height="64"/>
+                                <state key="normal" image="camera"/>
+                                <connections>
+                                    <action selector="firstCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XHA-gj-u5c"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="QDk-mN-u1z" firstAttribute="top" secondItem="U9g-h2-oax" secondAttribute="top" id="5b7-9E-Sj7"/>
                             <constraint firstItem="wku-PQ-5kZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7jB-1f-pjZ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="MS4-Sp-C5G" secondAttribute="bottom" constant="154" id="9fO-qI-wz3"/>
+                            <constraint firstItem="QDk-mN-u1z" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="84q-1R-RBz"/>
+                            <constraint firstItem="U9g-h2-oax" firstAttribute="trailing" secondItem="wku-PQ-5kZ" secondAttribute="trailing" id="D6t-MF-Dic"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QDk-mN-u1z" secondAttribute="trailing" constant="73" id="DSA-4g-lYj"/>
+                            <constraint firstItem="4Ib-8x-drH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JGz-8h-hhV"/>
+                            <constraint firstItem="QDk-mN-u1z" firstAttribute="leading" secondItem="wku-PQ-5kZ" secondAttribute="leading" id="Kz1-9C-MZY"/>
                             <constraint firstItem="wku-PQ-5kZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Qpw-0y-mfZ"/>
-                            <constraint firstItem="MS4-Sp-C5G" firstAttribute="top" secondItem="wku-PQ-5kZ" secondAttribute="bottom" constant="89" id="afw-fm-OgI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MS4-Sp-C5G" secondAttribute="trailing" constant="8" id="d8Q-i8-5Fk"/>
-                            <constraint firstItem="MS4-Sp-C5G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="7" id="q4r-l1-Yku"/>
+                            <constraint firstItem="4Ib-8x-drH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="SJv-Yc-2mj"/>
+                            <constraint firstItem="MS4-Sp-C5G" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="7" id="UIn-XT-U3G"/>
+                            <constraint firstItem="QDk-mN-u1z" firstAttribute="bottom" secondItem="U9g-h2-oax" secondAttribute="bottom" id="afB-Az-BIB"/>
+                            <constraint firstItem="QDk-mN-u1z" firstAttribute="top" secondItem="MS4-Sp-C5G" secondAttribute="bottom" constant="40" id="e5H-nx-1oe"/>
+                            <constraint firstItem="QDk-mN-u1z" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="613" id="erT-yp-WSj"/>
+                            <constraint firstItem="U9g-h2-oax" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="298" id="i21-AM-EGd"/>
                             <constraint firstItem="wku-PQ-5kZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qMX-PT-JGS"/>
+                            <constraint firstItem="MS4-Sp-C5G" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sg5-2h-nv5"/>
+                            <constraint firstItem="MS4-Sp-C5G" firstAttribute="centerX" secondItem="wku-PQ-5kZ" secondAttribute="centerX" id="wHX-Ve-rHZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cameraBtn" destination="4Ib-8x-drH" id="Soe-Fb-dla"/>
                         <outlet property="imageView" destination="MS4-Sp-C5G" id="VRW-3K-GFE"/>
+                        <outlet property="scrollView" destination="QDk-mN-u1z" id="8Gi-vr-Sn9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -82,4 +118,8 @@
             <point key="canvasLocation" x="88.799999999999997" y="38.23088455772114"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="64" height="64"/>
+        <image name="eraser" width="24" height="24"/>
+    </resources>
 </document>

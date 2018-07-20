@@ -13,15 +13,36 @@ import FlexibleImage
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var cameraBtn: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
     let imagePickerController = UIImagePickerController()
     var selectedImage = UIImage()
+    var picture = String()
+    var images = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"]
+    var imageViews = Array<UIButton>()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePickerController.delegate = self
+        //
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "handleTapGesture:"))
+        for i in 0..<images.count {
+            imageViews.append(UIButton(frame: CGRect(x: 0 + (i * 40), y: 0, width: 40, height: 40)))
+            imageViews[i].setBackgroundImage(UIImage(named: images[i]), for: .normal)
+            imageViews[i].setTitle("\(i+1)", for: .highlighted)
+            scrollView.contentSize = CGSize(width: 2000 , height: 45)
+            imageViews[i].addTarget(self, action: #selector(emojiClick(_:)), for: .touchUpInside)
+            scrollView.addSubview(imageViews[i])
+        }
+    }
+    @IBAction func deleteClick(_ sender: Any) {
+        for v in imageView.subviews{
+            v.removeFromSuperview()
+        }
     }
     
     // Camera iCON Button Setting
@@ -67,6 +88,46 @@ class ViewController: UIViewController {
         present(choiceOptionAlertController, animated: true)
     }
     
+    @IBAction func firstCamera(_ sender: Any) {
+        let choiceOptionAlertController = UIAlertController(
+            title: "메뉴를 선택하세요",
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        
+        let takePhotoAction = UIAlertAction(title: "사진 촬영", style: .default) { _ in
+            print("takePhotoAction")
+            
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
+            self.imagePickerController.sourceType = .camera
+            self.imagePickerController.allowsEditing = false
+            
+            self.present(self.imagePickerController, animated: true)
+        }
+        
+        let openGalleryAction = UIAlertAction(title: "갤러리에서 가져오기", style: .default) { _ in
+            print("openAlbumAction")
+            
+            let type = UIImagePickerControllerSourceType.photoLibrary
+            guard UIImagePickerController.isSourceTypeAvailable(type) else { return }
+            
+            self.imagePickerController.sourceType = type
+            self.present(self.imagePickerController, animated: true)
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            print("cancelAction")
+            
+            
+        }
+        
+        choiceOptionAlertController.addAction(takePhotoAction)
+        choiceOptionAlertController.addAction(openGalleryAction)
+        choiceOptionAlertController.addAction(cancelAction)
+        
+        present(choiceOptionAlertController, animated: true)
+    }
     
     // First filter Setting
     
@@ -117,10 +178,17 @@ class ViewController: UIViewController {
         imageView.image = vividFilter
     }
     
+    @IBAction func originalClick(_ sender: Any) {
+        guard imageView.image != nil else { return }
+        imageView.image = selectedImage
+    }
+    
+    
     @IBAction func saveClick(_ sender: Any) {
         guard let image = imageView.image else { return }
         //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        let snapshotImage = UIImage.imageWithView(view: imageView)
+        UIImageWriteToSavedPhotosAlbum(snapshotImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
         //사진 저장 한후
@@ -132,6 +200,26 @@ class ViewController: UIViewController {
             alertmsg.addAction(alertaction)
             self.present(alertmsg, animated: true)
         }
+    }
+    
+    @IBAction private func handleTapGesture(_ sender: UITapGestureRecognizer) {
+        guard let pic = UIImage(named: picture) else { return }
+        var whereTap = sender.location(in: sender.view)
+        var stickerView  = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        stickerView.center.x = whereTap.x
+        stickerView.center.y = whereTap.y
+        stickerView.image = pic
+        imageView.addSubview(stickerView)
+        //        print("\(picture)")
+        //        var whereTap = sender.location(in: sender.view)
+        //        print("\(whereTap.x), \(whereTap.y)")
+    }
+    
+    @IBAction private func emojiClick(_ button: UIButton) {
+        guard let titles = button.titleLabel?.text else { return }
+        print("titles = \(titles)")
+        picture = titles
+        print("picture = \(picture)")
     }
     
 }
@@ -154,6 +242,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
             let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage
             selectedImage = editedImage ?? originalImage!
             imageView.image = selectedImage
+            cameraBtn.isHidden = true
 
         }
         
@@ -171,6 +260,16 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("\n---------- [ imagePickerControllerDidCancel ] ----------\n")
         picker.dismiss(animated: true)
+    }
+}
+
+extension UIImage {
+    class func imageWithView(view: UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
     }
 }
 
